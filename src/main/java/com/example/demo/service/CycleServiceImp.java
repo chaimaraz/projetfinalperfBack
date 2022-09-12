@@ -36,5 +36,6 @@ public class CycleServiceImp implements CycleService {
 		cycleRepository.deleteById(id);
 		
 	}
-
+	
+	
 }

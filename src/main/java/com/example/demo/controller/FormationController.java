@@ -37,10 +37,20 @@ public class FormationController {
 		 return new ResponseEntity<>(formation, HttpStatus.OK);
 	    }
 
-	    @PostMapping(value="/add")
-	    public ResponseEntity<Formation> addFormation(@RequestBody Formation formation){
-	    	Formation f=formationService.save(formation);
-	    	return new ResponseEntity<>(f, HttpStatus.CREATED);
+	 @PostMapping(value="/add")
+	 public ResponseEntity<?> addFormation(@RequestBody Formation formation){
+		 try {
+				if(formationService.exist(formation)) {
+					return ResponseEntity.badRequest().body("formation exist");
+				} else {
+					return ResponseEntity.ok(formationService.save(formation));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}	
+		 
+		 
 	    }
 
 	    @DeleteMapping("/delete/{id}")

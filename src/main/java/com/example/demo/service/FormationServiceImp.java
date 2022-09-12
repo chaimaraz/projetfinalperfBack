@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import java.sql.Date;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,6 @@ public class FormationServiceImp implements FormationService{
 
 	@Override
 	public Formation save(Formation formation) {
-		long miliseconds = System.currentTimeMillis();
-        Date date = new Date(miliseconds);
-		formation.setRegisteredDate(date);
 		return formationRepository.save(formation);
 	}
 
@@ -41,6 +39,14 @@ public class FormationServiceImp implements FormationService{
 		formationRepository.deleteById(id);
 		
 	}
+
+	@Override
+	public boolean exist(Formation f) {
+		Optional<Formation> formation = formationRepository.findFirstByCycleAndUser(f.getCycle(), f.getUser());
+		return formation.isPresent();
+	}
+	
+	
 	
 
 	

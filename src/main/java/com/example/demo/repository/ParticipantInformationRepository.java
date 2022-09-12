@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.ParticipantInformation;
 
-@Repository
+
 public interface ParticipantInformationRepository extends JpaRepository<ParticipantInformation, Long> {
 	 
 }

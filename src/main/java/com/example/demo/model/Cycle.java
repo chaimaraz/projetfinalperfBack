@@ -2,9 +2,12 @@ package com.example.demo.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,12 +18,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.action.internal.OrphanRemovalAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="Cycle")
 public class Cycle implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCycle;
@@ -41,13 +50,15 @@ public class Cycle implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	@JoinColumn(name = "formateur.idFormateur")
 	private Formateur formateur;
+
 	
 	 
 	 
+	
 	public Long getIdCycle() {
 		return idCycle;
 	}
-	public void setIdCycle(Long id) {
+	public void setIdCycle( Long idCycle) {
 		this.idCycle = idCycle;
 	}
 	public String getEntrprise() {
