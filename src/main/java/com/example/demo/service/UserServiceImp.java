@@ -49,6 +49,11 @@ public class UserServiceImp implements UserService {
 		
 		return null;
 	}
+
+	@Override
+	public User updateUser(User u) {
+		return userRepository.save(u);
+	}
 	
 	
 }
